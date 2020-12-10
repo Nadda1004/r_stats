@@ -7,7 +7,7 @@
 ticket_cost <- 70
 ticket_cost_child <- 60
 movies <-
-  c('Greeland', 'The Invisble Man', 'Taxi Driver', 'Frozen 2', 'Mulan')  # List 5 of your favorite movies
+  c('Greenland', 'The Invisble Man', 'Taxi Driver', 'Frozen 2', 'Mulan')  # List 5 of your favorite movies
 screens <-
   5 # How many screens does the theater have? (assume 1 per movie)
 seats <- 50  # How many seats does each theater hold
@@ -38,7 +38,6 @@ for (day in 1:length(week_days)) {
     
     # Calculate revenue, and add to running total for the day
     revenue = revenue + (adults_revenue  + children_revenue)
-    
   }
   # Save total to the corresponding day
   total_revnues_per_day[day] = revenue
@@ -60,7 +59,7 @@ barplot(
 # Make any other chart
 
 # Simple Pie Chart
-#install.packages('plotrix')
+#install.packages('plotrix') <--- this need to be installed 
 library(plotrix)
 pie3D(
   total_revnues_per_day,
