@@ -7,7 +7,7 @@
 ticket_cost <- 70
 ticket_cost_child <- 60
 movies <-
-  c('Greenland', 'The Invisble Man', 'Taxi Driver', 'Frozen 2', 'Mulan')  # List 5 of your favorite movies
+  c('Greenland', 'The Invisible Man', 'Taxi Driver', 'Frozen 2', 'Mulan')  # List 5 of your favorite movies
 screens <-
   5 # How many screens does the theater have? (assume 1 per movie)
 seats <- 50  # How many seats does each theater hold
