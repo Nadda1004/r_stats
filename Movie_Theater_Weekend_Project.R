@@ -7,9 +7,13 @@
 ticket_cost <- 70
 ticket_cost_child <- 60
 movies <-
-  c('Greenland', 'The Invisible Man', 'Taxi Driver', 'Frozen 2', 'Mulan')  # List 5 of your favorite movies
-screens <-
-  5 # How many screens does the theater have? (assume 1 per movie)
+  c('Greenland',
+    'The Invisble Man',
+    'Taxi Driver',
+    'Frozen 2',
+    'Mulan')  # List 5 of your favorite movies
+
+screens <- 5 # How many screens does the theater have? (assume 1 per movie)
 seats <- 50  # How many seats does each theater hold
 week_days <- rep(0, 7)  # Store totals for each day
 
@@ -21,17 +25,17 @@ for (day in 1:length(week_days)) {
   total_revnues_per_day[day] <- 0
   week_days[day] <- day
   revenue <- 0
+  
   # iterate through the amount of screens on a particular day
   for (s in 1:screens) {
     # Calculate  how many adults and children are watching the movie
     visitors_adults <- 0
     visitors_children <- 0
-    total_vistors <- 55
-    while (total_vistors >= seats) {
-      visitors_adults = sample(seats, 1)
-      visitors_children <- sample(seats, 1)
-      total_vistors = visitors_adults + visitors_children
-    }
+    
+    visitors_adults = sample(seats, 1)
+    seats_remaining <- seats - visitors_adults
+    visitors_children <- sample(seats_remaining, 1)
+    
     # Calculate the revenue for adults and children
     adults_revenue <- visitors_adults * ticket_cost
     children_revenue <- visitors_children * ticket_cost_child
@@ -52,14 +56,14 @@ barplot(
   xlab = "Days of the week",
   ylab = "Revenue",
   names.arg = days_week ,
-  main = "Bar Chart of The Revenue of Movies in a week",
+  main = "Bard Chart of The Revenue of Movies in a week",
   col = cm.colors(length(total_revnues_per_day))
 )
 
 # Make any other chart
 
 # Simple Pie Chart
-#install.packages('plotrix') <--- this need to be installed 
+#install.packages('plotrix') <--- this need to be installed
 library(plotrix)
 pie3D(
   total_revnues_per_day,
