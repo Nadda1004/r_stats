@@ -52,7 +52,7 @@ barplot(
   xlab = "Days of the week",
   ylab = "Revenue",
   names.arg = days_week ,
-  main = "Bard Chart of The Revenue of Movies in a week",
+  main = "Bar Chart of The Revenue of Movies in a week",
   col = cm.colors(length(total_revnues_per_day))
 )
 
