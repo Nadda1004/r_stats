@@ -88,8 +88,6 @@ theater <- function(theater_num , screens , seats , movies , movie_rating){
   # iterate through the week
   for (day in 1:length(week_days)) {
     # Keep track of total revenue for the day
-    total_revnues_per_day[day] <- 0
-    week_days[day] <- day
     total_revenue <- 0
     
     # iterate through the amount of screens on a particular day
@@ -99,7 +97,7 @@ theater <- function(theater_num , screens , seats , movies , movie_rating){
       visitors_children <- 0
       
       # check the rating for each movie
-      if(movie_rating[s] == 'PG-13'){
+      if(movie_rating[s] == 'PG-13' | movie_rating[s] == 'R' | movie_rating[s] == 'Not Rated'){
         # only adults
         visitors_adults = sample(seats, 1)
         revenue = calculate_revenue(visitors_adults , visitors_children = 0 , snacks , ticket_cost , ticket_cost_child)
@@ -133,7 +131,6 @@ theater <- function(theater_num , screens , seats , movies , movie_rating){
       total_revnues_per_day[index_of_max]
     )
   )
-  
 }
 
 movies <-
