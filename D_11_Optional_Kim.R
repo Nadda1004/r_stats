@@ -19,28 +19,21 @@ prob <- function(marginals , conditionals) {
         j == 1
       }
     }
-    
   }
-  
   print(paste0("Marginals: P{A|&} = " , marginals[1] , "  P{A'|&} = " , marginals[2]))
   print(paste0(
     "conditionals: P{B|A,&} = " , conditionals[1] ,
-               " ,  P{B'|A,&} = " , conditionals[2]
-  ))
+               " ,  P{B'|A,&} = " , conditionals[2] ))
   print(paste0(
     "conditionals: P{B|A',&} = " , conditionals[1] ,
-              " ,  P{B'|A',&} = " , conditionals[2]
-  ))
+              " ,  P{B'|A',&} = " , conditionals[2] ))
   print(paste0(
     "Joints: A and B = " , calculate_joints[1] ,
-        " ,  A and B' = " , calculate_joints[2]
-  ))
+        " ,  A and B' = " , calculate_joints[2]))
   print(paste0(
     "Joints: A' and B = " , calculate_joints[3] ,
-    " ,  A' and B' = " , calculate_joints[4]
-  ))
+    " ,  A' and B' = " , calculate_joints[4] ))
 }
-
 marginals <- c(0.6 , 0.4)
 conditionals <- c(0.8 , 0.2)
 prob(marginals , conditionals)
