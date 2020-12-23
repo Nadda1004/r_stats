@@ -1,9 +1,8 @@
 library(shiny)
 library(tidyverse)
 #load the dataset
-diamons_carat <- select(diamonds , carat) %>% filter( carat >= 1 )
-hist(diamons_carat$carat)
- 
+diamonds_carat <- select(diamonds , carat) %>% filter( carat >= 1 )
+
 ui <- fluidPage(
   # Application title
   headerPanel("Diamanod Carat Frequncy Histogram!"),
@@ -13,11 +12,13 @@ ui <- fluidPage(
     helpText("This Dashboard show the carats and ot's total Observations") , 
     sliderInput("obs", 
                 "Carats:", 
-                min = min(diamons_carat$carat),
-                max = max(diamons_carat$carat), 
-                value = 2)
-  ),
-  
+                min = min(diamonds_carat$carat),
+                max = max(diamonds_carat$carat), 
+                value = 1)  , 
+    selectInput("color", label = "Pick a colour", 
+                choices = c("Red", "darkmagenta", "chocolate", "Green"))
+  ) , 
+    
   # Show a plot of the generated distribution
   mainPanel(
     plotOutput("distPlot")
@@ -26,12 +27,9 @@ ui <- fluidPage(
 
 # Define server logic required to generate and plot a random distribution
 server <- function(input, output) {
-
+  
   output$distPlot <- renderPlot({
-    
-    # generate an rnorm distribution and plot it
-    dist <- rnorm(input$obs)
-    hist(dist , xlab = "Carat" , ylab = "Number Of Observations" , main = "Diamonds's Carat Histogram")
+    hist(diamonds_carat$carat , xlab = "Carat" , ylab = "Number Of Observations" , main = "Diamonds's Carat Histogram"  , col = input$color)
   })
 }
 
