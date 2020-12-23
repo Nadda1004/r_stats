@@ -1,40 +1,38 @@
-#install.packages("shiny")
 library(shiny)
-library (tidyverse)
-
-#diamonds dataset
-df <- diamonds
-# group by cuts and count each value and the mean of the carats
-by_cut <- group_by(diamonds, cut)
-by_cut_s <- summarise(by_cut, count = n(), avg = mean(carat))
-
+library(tidyverse)
+#load the dataset
+diamons_carat <- select(diamonds , carat) %>% filter( carat >= 1 )
+hist(diamons_carat$carat)
+ 
 ui <- fluidPage(
-  titlePanel("diamonds"),
+  # Application title
+  headerPanel("Diamanod Carat Frequncy Histogram!"),
   
-  sidebarLayout(
-    sidebarPanel(
-      helpText("View The Diamonds.")
-      , selectInput("var", 
-                    label = "Choose Type of Cut To Display",
-                    choices = by_cut_s$cut))
-      , mainPanel(
-        # Output: Histogram ----
-        plotOutput(outputId = "distPlot") )
-    )
+  # Sidebar with a slider input for carat's values
+  sidebarPanel(
+    helpText("This Dashboard show the carats and ot's total Observations") , 
+    sliderInput("obs", 
+                "Carats:", 
+                min = min(diamons_carat$carat),
+                max = max(diamons_carat$carat), 
+                value = 2)
+  ),
+  
+  # Show a plot of the generated distribution
+  mainPanel(
+    plotOutput("distPlot")
   )
+)
 
+# Define server logic required to generate and plot a random distribution
 server <- function(input, output) {
+
   output$distPlot <- renderPlot({
-    x    <- c(by_cut_s$cut)
-    bins <- seq(min(x), max(x))
     
-    hist(x, breaks = bins, freq = by_cut_s$count , col = "#75AADB", border = "white",
-         xlab = "Diamond Cut",
-         ylab = "Count" ,
-         main = "Diamond Cut Histogram")
-    
+    # generate an rnorm distribution and plot it
+    dist <- rnorm(input$obs)
+    hist(dist , xlab = "Carat" , ylab = "Number Of Observations" , main = "Diamonds's Carat Histogram")
   })
-  
 }
-# Run the application
-shinyApp(ui = ui, server = server)
+
+shinyApp(ui, server)
